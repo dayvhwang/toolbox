@@ -51,7 +51,7 @@ function render(tools, t) {
   } else if (t.url) {
     const hero = node.querySelector(".hero");
     const img = hero.querySelector("img");
-    img.src = `./assets/thumbs/${t.slug}.png`;
+    img.src = `./assets/thumbs/${t.slug}.jpg`;
     img.alt = `${t.name} screenshot`;
     img.addEventListener("load", () => (hero.hidden = false), { once: true });
     hero.href = t.url;

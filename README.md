@@ -60,7 +60,7 @@ Each tool lives in its own repo and its own deployment. This site is the index: 
    - `status: "archived"` keeps the tool page but leaves it out of the row.
    - The label under the name is the first tag, so put the most descriptive tag first.
 
-2. `npm run thumbs my-tool` to screenshot it into `assets/thumbs/`.
+2. `npm run thumbs my-tool` to make its cover in `assets/thumbs/` (a screenshot set on a tinted square).
 3. `npm test` to validate, `npm run readme` to refresh the table above.
 
 ## Run locally

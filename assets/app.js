@@ -13,7 +13,7 @@ function item(t, clone = false) {
   const pic = node.querySelector(".pic");
   pic.style.setProperty("--h", hueFor(t.slug));
   const img = pic.querySelector("img");
-  img.src = `./assets/thumbs/${t.slug}.png`;
+  img.src = `./assets/thumbs/${t.slug}.jpg`;
   img.draggable = false;
   img.addEventListener("error", () => img.remove(), { once: true });
   node.querySelector(".name").textContent = t.name;
@@ -42,6 +42,12 @@ function carousel(section, tools, direction = 1) {
   let focus = false;
   let dragging = false;
   let holdUntil = 0; // no drift until this time, after the user has moved it
+  let movingUntil = 0; // the row counts as "moving" until this time: no hover highlight
+
+  function moving(ms) {
+    movingUntil = performance.now() + ms;
+    track.classList.add("moving");
+  }
 
   function paint() {
     // Keep x inside the middle copy so the strip never runs out on either side.
@@ -67,6 +73,7 @@ function carousel(section, tools, direction = 1) {
   function tick(now) {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
+    if (track.classList.contains("moving") && !dragging && Math.abs(v) < 40 && now > movingUntil) track.classList.remove("moving");
     if (!dragging) {
       if (Math.abs(v) > 2) {
         x += v * dt;
@@ -91,6 +98,7 @@ function carousel(section, tools, direction = 1) {
       x += dx;
       v = 0;
       holdUntil = performance.now() + 1500;
+      moving(400);
       paint();
     },
     { passive: false }
@@ -118,6 +126,7 @@ function carousel(section, tools, direction = 1) {
     const dx = e.clientX - startX;
     if (!moved && Math.abs(dx) > 4) moved = true;
     if (!moved) return;
+    moving(300);
     const now = performance.now();
     const dt = (now - lastT) / 1000;
     if (dt > 0) v = ((lastX - e.clientX) / dt) * 0.5 + v * 0.5;
