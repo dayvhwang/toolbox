@@ -13,7 +13,7 @@
   --font: "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, sans-serif;
   --edge: 16px;
   --gap: 2px;
-  --w: clamp(240px, 26vw, 360px); /* one square tile */
+  --w: clamp(195px, 21vw, 290px); /* one square tile */
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -44,7 +44,7 @@
 
 @media (max-width: 639px) {
   :root {
-    --w: 66vw;
+    --w: 54vw;
   }
 }
 
