@@ -1,4 +1,4 @@
-import { loadTools, hueFor, categoryOf, el, toolHref, thumbUrl, initTheme } from "./shared.js";
+import { loadTools, categoryOf, el, toolHref, thumbUrl, initTheme } from "./shared.js";
 
 initTheme();
 
@@ -10,9 +10,7 @@ function item(t, clone = false) {
   const node = tpl.content.firstElementChild.cloneNode(true);
   node.href = toolHref(t);
   node.draggable = false;
-  const pic = node.querySelector(".pic");
-  pic.style.setProperty("--h", hueFor(t.slug));
-  const img = pic.querySelector("img");
+  const img = node.querySelector(".pic img");
   img.src = thumbUrl(t);
   img.draggable = false;
   img.addEventListener("error", () => img.remove(), { once: true });

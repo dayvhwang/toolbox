@@ -11,13 +11,6 @@ export async function loadTools() {
   return cache;
 }
 
-// Stable hue per slug, for the tinted placeholder when there is no thumbnail.
-export function hueFor(slug) {
-  let h = 0;
-  for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return h % 360;
-}
-
 // Short label under a tool's name: its first tag, capitalised, else its kind.
 export function categoryOf(t) {
   const s = (t.tags && t.tags[0]) || t.kind || "";

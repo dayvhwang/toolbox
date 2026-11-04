@@ -299,7 +299,7 @@ p {
   aspect-ratio: 1;
   margin-bottom: 8px;
   overflow: hidden;
-  background: oklch(from var(--tint) l 0.012 var(--h));
+  background: var(--tint); /* the covers are grey too, so a tile loads without a colour flash */
 }
 .pic img {
   display: block;
