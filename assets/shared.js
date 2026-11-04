@@ -1,7 +1,4 @@
-// Shared bits for index and tool pages: manifest loading, theme, small helpers.
-
-export const KINDS = ["web", "cli", "extension", "site"];
-export const KIND_LABEL = { web: "web", cli: "cli", extension: "extension", site: "site" };
+// Shared bits for index and tool pages: manifest loading and small helpers.
 
 let cache;
 export async function loadTools() {
@@ -12,11 +9,17 @@ export async function loadTools() {
   return cache;
 }
 
-// Stable hue per slug, for the gradient fallback when there is no thumbnail.
+// Stable hue per slug, for the tinted placeholder when there is no thumbnail.
 export function hueFor(slug) {
   let h = 0;
   for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   return h % 360;
+}
+
+// Short label under a tool's name: its first tag, capitalised, else its kind.
+export function categoryOf(t) {
+  const s = (t.tags && t.tags[0]) || t.kind || "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 export function el(tag, attrs = {}, children = []) {
@@ -32,38 +35,6 @@ export function el(tag, attrs = {}, children = []) {
   return n;
 }
 
-// Theme: three-way control, persisted. "system" clears the attribute.
-export function initTheme() {
-  const buttons = [...document.querySelectorAll("[data-theme-set]")];
-  const read = () => {
-    try {
-      return localStorage.getItem("theme") || "system";
-    } catch {
-      return "system";
-    }
-  };
-  const apply = (mode) => {
-    if (mode === "light" || mode === "dark") document.documentElement.setAttribute("data-theme", mode);
-    else document.documentElement.removeAttribute("data-theme");
-    for (const b of buttons) b.setAttribute("aria-pressed", String(b.dataset.themeSet === mode));
-  };
-  apply(read());
-  for (const b of buttons) {
-    b.addEventListener("click", () => {
-      const mode = b.dataset.themeSet;
-      try {
-        if (mode === "system") localStorage.removeItem("theme");
-        else localStorage.setItem("theme", mode);
-      } catch {}
-      apply(mode);
-    });
-  }
-}
-
-export function hostOf(url) {
-  try {
-    return new URL(url).host;
-  } catch {
-    return url;
-  }
+export function toolHref(t) {
+  return `./tool.html?t=${encodeURIComponent(t.slug)}`;
 }

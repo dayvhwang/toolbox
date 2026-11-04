@@ -2,7 +2,7 @@
 
 Every small tool I've built, in one place: **[dayvhwang.com/toolbox](https://dayvhwang.com/toolbox/)**.
 
-Each tool lives in its own repo and its own deployment. This site is the index: a card per tool, search, filters, and an inline view for the single-page ones. No framework, no build step. The whole catalog is one file, [`tools.json`](tools.json).
+Each tool lives in its own repo and its own deployment. This site is the index: one row of tools, a tool page each, and an inline view for the single-page ones. No framework, no build step. The whole catalog is one file, [`tools.json`](tools.json).
 
 <!-- tools:start -->
 
@@ -57,7 +57,8 @@ Each tool lives in its own repo and its own deployment. This site is the index: 
    - `kind`: `web`, `cli`, `extension` or `site`.
    - `embed: true` shows the tool inside the page in an iframe. Use it for static, single-page tools.
    - `repoPublic` controls whether a Source link is shown.
-   - `status: "archived"` hides it behind the Archive chip.
+   - `status: "archived"` moves it to the Archive row, shown on request.
+   - The label under the name is the first tag, so put the most descriptive tag first.
 
 2. `npm run thumbs my-tool` to screenshot it into `assets/thumbs/`.
 3. `npm test` to validate, `npm run readme` to refresh the table above.
