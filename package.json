@@ -1,0 +1,16 @@
+{
+  "name": "toolbox",
+  "version": "1.0.0",
+  "description": "dave's toolbox: every small tool in one place",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate.mjs",
+    "readme": "node scripts/readme.mjs",
+    "thumbs": "node scripts/thumbs.mjs",
+    "dev": "python3 -m http.server 5180"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.0"
+  }
+}
