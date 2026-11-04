@@ -1,5 +1,7 @@
 // Shared bits for index and tool pages: manifest loading, theme, small helpers.
 
+import { stamp } from "./thumbs/stamp.js";
+
 let cache;
 export async function loadTools() {
   if (cache) return cache;
@@ -33,6 +35,11 @@ export function el(tag, attrs = {}, children = []) {
   }
   for (const c of [].concat(children)) if (c != null) n.append(c);
   return n;
+}
+
+// Cover image for a tool. The stamp changes whenever the covers are regenerated.
+export function thumbUrl(t) {
+  return `./assets/thumbs/${t.slug}.jpg?${stamp}`;
 }
 
 export function toolHref(t) {

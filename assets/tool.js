@@ -1,4 +1,4 @@
-import { loadTools, categoryOf, el, toolHref, initTheme } from "./shared.js";
+import { loadTools, categoryOf, el, toolHref, thumbUrl, initTheme } from "./shared.js";
 
 initTheme();
 
@@ -51,7 +51,7 @@ function render(tools, t) {
   } else if (t.url) {
     const hero = node.querySelector(".hero");
     const img = hero.querySelector("img");
-    img.src = `./assets/thumbs/${t.slug}.jpg`;
+    img.src = thumbUrl(t);
     img.alt = `${t.name} screenshot`;
     img.addEventListener("load", () => (hero.hidden = false), { once: true });
     hero.href = t.url;

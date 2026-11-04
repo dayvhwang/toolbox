@@ -3,7 +3,7 @@
 // Usage: node scripts/thumbs.mjs [slug ...]     (also `npm run thumbs`)
 // Needs: npm i, then `npx playwright install chromium` once.
 
-import { readFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 
@@ -66,5 +66,10 @@ for (const t of tools) {
 }
 
 await browser.close();
+if (!failed) {
+  // The pages append this to every cover URL, so a regenerated cover is never served from a stale cache.
+  const stamp = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
+  await writeFile(new URL("stamp.js", outDir), `// Written by scripts/thumbs.mjs on each run; do not edit.\nexport const stamp = "${stamp}";\n`);
+}
 console.log(`${tools.length - failed}/${tools.length} covers written to assets/thumbs`);
 process.exit(failed ? 1 : 0);
