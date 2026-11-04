@@ -9,7 +9,7 @@ const next = document.getElementById("next");
 const tpl = document.getElementById("detail");
 
 function notFound(slug) {
-  document.title = "Not found · dave's toolbox";
+  document.title = "Not found · toolbox";
   crumb.textContent = "not found";
   main.replaceChildren(
     el("div", { class: "detail" }, [
@@ -23,7 +23,7 @@ function notFound(slug) {
 
 function render(tools, t) {
   const node = tpl.content.firstElementChild.cloneNode(true);
-  document.title = `${t.name} · dave's toolbox`;
+  document.title = `${t.name} · toolbox`;
   crumb.textContent = t.name;
 
   node.querySelector(".name").textContent = t.name;

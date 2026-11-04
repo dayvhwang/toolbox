@@ -1,4 +1,4 @@
-# dave's toolbox
+# toolbox
 
 Every small tool I've built, in one place: **[dayvhwang.com/toolbox](https://dayvhwang.com/toolbox/)**.
 
