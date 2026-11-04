@@ -13,13 +13,12 @@
   --font: "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, sans-serif;
   --edge: 16px;
   --gap: 2px;
-  --n: 7; /* set from tools.json: columns in the row */
-  --cols: var(--n);
+  --w: clamp(150px, 16vw, 220px); /* one square tile */
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --paper: #111;
     --ink: #fff;
     --text: oklch(0.66 0.012 165);
@@ -28,15 +27,24 @@
     --focus: oklch(0.835 0.125 186.726);
   }
 }
-
-@media (max-width: 1023px) {
-  :root {
-    --cols: 4;
-  }
+:root[data-theme="dark"] {
+  --paper: #111;
+  --ink: #fff;
+  --text: oklch(0.66 0.012 165);
+  --tint: oklch(0.22 0 0);
+  --line: oklch(1 0 0 / 0.1);
+  --focus: oklch(0.835 0.125 186.726);
 }
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 @media (max-width: 639px) {
   :root {
-    --cols: 2;
+    --w: 42vw;
   }
 }
 
@@ -90,6 +98,15 @@ p {
 }
 .skip:focus {
   top: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .plain {
@@ -184,6 +201,28 @@ p {
 .side {
   grid-column: 3;
   justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.theme {
+  display: flex;
+  gap: 2px;
+}
+.theme button {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 21px;
+  color: var(--ink);
+  opacity: 0.3;
+  transition: opacity 0.3s var(--ease);
+}
+.theme button:hover {
+  opacity: 0.7;
+}
+.theme button[aria-pressed="true"] {
+  opacity: 1;
 }
 
 .bottom > * {
@@ -203,27 +242,39 @@ p {
 }
 
 .row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--gap);
+  margin: 0 calc(-1 * var(--edge));
 }
 .row[hidden] {
   display: none;
 }
-@media (max-width: 639px) {
-  .row {
-    justify-content: flex-start;
-  }
+.track {
+  display: flex;
+  column-gap: var(--gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding: 0 var(--edge);
+  cursor: grab;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+.track::-webkit-scrollbar {
+  display: none;
+}
+.track:active {
+  cursor: grabbing;
 }
 
 .item {
-  width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  flex: 0 0 var(--w);
+  width: var(--w);
   text-align: center;
+  -webkit-user-drag: none;
+  user-select: none;
   transition: opacity 0.4s var(--ease);
 }
-.row:hover .item:not(:hover),
-.row:focus-within .item:not(:focus-visible) {
+.track:hover .item:not(:hover),
+.track:focus-within .item:not(:focus-visible) {
   opacity: 0.4;
 }
 .item:focus-visible {
@@ -232,7 +283,7 @@ p {
 
 .pic {
   display: block;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1;
   margin-bottom: 8px;
   overflow: hidden;
   background: oklch(from var(--tint) l 0.012 var(--h));
@@ -243,6 +294,7 @@ p {
   height: 100%;
   object-fit: cover;
   object-position: top;
+  pointer-events: none;
 }
 
 .item .name,
@@ -320,7 +372,7 @@ p {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1;
   object-fit: cover;
   object-position: top;
   transition: opacity 0.3s var(--ease);

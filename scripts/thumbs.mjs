@@ -1,4 +1,4 @@
-// Screenshots every tool that has a url into assets/thumbs/<slug>.png (rendered at 1024x1280 portrait, saved at 512x640).
+// Screenshots every tool that has a url into assets/thumbs/<slug>.png (rendered at 1024x1024, saved at 512x512).
 // Usage: node scripts/thumbs.mjs [slug ...]     (also `npm run thumbs`)
 // Needs: npm i, then `npx playwright install chromium` once.
 
@@ -17,8 +17,8 @@ const tools = JSON.parse(await readFile(new URL("tools.json", root), "utf8")).fi
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({
-  viewport: { width: 1024, height: 1280 },
-  deviceScaleFactor: 0.5, // 1024x1280 layout, 512x640 file: a 4:5 portrait, plenty for a thumbnail
+  viewport: { width: 1024, height: 1024 },
+  deviceScaleFactor: 0.5, // 1024x1024 layout, 512x512 file: a square, plenty for a thumbnail
   colorScheme: "light",
   reducedMotion: "reduce",
 });
@@ -30,7 +30,7 @@ for (const t of tools) {
   try {
     await page.goto(t.url, { waitUntil: "networkidle", timeout: 30_000 }).catch(() => page.goto(t.url, { waitUntil: "load", timeout: 30_000 }));
     await page.waitForTimeout(1500); // let fonts, canvases and intros settle
-    await page.screenshot({ path: file, clip: { x: 0, y: 0, width: 1024, height: 1280 }, scale: "device" });
+    await page.screenshot({ path: file, clip: { x: 0, y: 0, width: 1024, height: 1024 }, scale: "device" });
     console.log(`ok   ${t.slug}  ← ${t.url}`);
   } catch (err) {
     failed++;

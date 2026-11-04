@@ -1,4 +1,6 @@
-import { loadTools, categoryOf, el, toolHref } from "./shared.js";
+import { loadTools, categoryOf, el, toolHref, initTheme } from "./shared.js";
+
+initTheme();
 
 const main = document.getElementById("tool");
 const crumb = document.getElementById("crumb");

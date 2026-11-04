@@ -1,4 +1,4 @@
-// Shared bits for index and tool pages: manifest loading and small helpers.
+// Shared bits for index and tool pages: manifest loading, theme, small helpers.
 
 let cache;
 export async function loadTools() {
@@ -37,4 +37,32 @@ export function el(tag, attrs = {}, children = []) {
 
 export function toolHref(t) {
   return `./tool.html?t=${encodeURIComponent(t.slug)}`;
+}
+
+// Theme: three-way control, persisted. "system" clears the attribute.
+export function initTheme() {
+  const buttons = [...document.querySelectorAll("[data-theme-set]")];
+  const read = () => {
+    try {
+      return localStorage.getItem("theme") || "system";
+    } catch {
+      return "system";
+    }
+  };
+  const apply = (mode) => {
+    if (mode === "light" || mode === "dark") document.documentElement.setAttribute("data-theme", mode);
+    else document.documentElement.removeAttribute("data-theme");
+    for (const b of buttons) b.setAttribute("aria-pressed", String(b.dataset.themeSet === mode));
+  };
+  apply(read());
+  for (const b of buttons) {
+    b.addEventListener("click", () => {
+      const mode = b.dataset.themeSet;
+      try {
+        if (mode === "system") localStorage.removeItem("theme");
+        else localStorage.setItem("theme", mode);
+      } catch {}
+      apply(mode);
+    });
+  }
 }
