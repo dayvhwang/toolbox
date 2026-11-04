@@ -57,7 +57,7 @@ Each tool lives in its own repo and its own deployment. This site is the index: 
    - `kind`: `web`, `cli`, `extension` or `site`.
    - `embed: true` shows the tool inside the page in an iframe. Use it for static, single-page tools.
    - `repoPublic` controls whether a Source link is shown.
-   - `status: "archived"` moves it to the Archive row, shown on request.
+   - `status: "archived"` keeps the tool page but leaves it out of the row.
    - The label under the name is the first tag, so put the most descriptive tag first.
 
 2. `npm run thumbs my-tool` to screenshot it into `assets/thumbs/`.

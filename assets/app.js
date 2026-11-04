@@ -3,8 +3,6 @@ import { loadTools, hueFor, categoryOf, el, toolHref, initTheme } from "./shared
 initTheme();
 
 const grid = document.getElementById("grid");
-const archive = document.getElementById("archive");
-const toggle = document.getElementById("toggle-archive");
 const tpl = document.getElementById("item");
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -167,29 +165,10 @@ function carousel(section, tools, direction = 1) {
   requestAnimationFrame(tick);
 }
 
-// The archive row is linkable: #archive opens it.
-function setArchive(open) {
-  archive.hidden = !open;
-  toggle.setAttribute("aria-expanded", String(open));
-  toggle.textContent = open ? "Close archive" : "Archive";
-  const want = open ? "#archive" : "";
-  if (location.hash !== want) history.replaceState(null, "", want || location.pathname + location.search);
-  if (open) window.dispatchEvent(new Event("resize")); // measure the row now that it is visible
-}
-
 try {
   const tools = await loadTools();
-  const active = tools.filter((t) => t.status !== "archived");
-  const archived = tools.filter((t) => t.status === "archived");
-  carousel(grid, active, 1);
-  if (archived.length) {
-    toggle.hidden = false;
-    toggle.addEventListener("click", () => setArchive(archive.hidden));
-    const sync = () => setArchive(location.hash === "#archive");
-    window.addEventListener("hashchange", sync);
-    sync();
-    carousel(archive, archived, -1);
-  }
+  // Archived tools stay in the manifest (and keep their tool pages) but are not shown here.
+  carousel(grid, tools.filter((t) => t.status !== "archived"));
 } catch (err) {
   grid.replaceChildren(el("p", { class: "note", text: `Could not load tools.json (${err.message}).` }));
 }
