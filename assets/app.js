@@ -47,6 +47,22 @@ function carousel(section, tools, direction = 1) {
   function moving(ms) {
     movingUntil = performance.now() + ms;
     track.classList.add("moving");
+    light();
+  }
+
+  // The highlighted tile is whatever is under the mouse, worked out from the pointer's
+  // last position rather than :hover: the row moves under a still cursor (wheel, drift)
+  // and the browser does not refresh :hover until the mouse moves again.
+  let pointer = null;
+  let lit = null;
+  function light() {
+    const next =
+      pointer && !track.classList.contains("moving") ? document.elementFromPoint(pointer.x, pointer.y)?.closest(".item") ?? null : null;
+    if (next === lit) return;
+    lit?.classList.remove("lit");
+    lit = next;
+    lit?.classList.add("lit");
+    track.classList.toggle("lit", !!lit);
   }
 
   function paint() {
@@ -73,7 +89,10 @@ function carousel(section, tools, direction = 1) {
   function tick(now) {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
-    if (track.classList.contains("moving") && !dragging && Math.abs(v) < 40 && now > movingUntil) track.classList.remove("moving");
+    if (track.classList.contains("moving") && !dragging && Math.abs(v) < 40 && now > movingUntil) {
+      track.classList.remove("moving");
+      light();
+    }
     if (!dragging) {
       if (Math.abs(v) > 2) {
         x += v * dt;
@@ -147,7 +166,17 @@ function carousel(section, tools, direction = 1) {
   track.addEventListener("click", (e) => moved && e.preventDefault(), true);
 
   track.addEventListener("pointerenter", (e) => e.pointerType === "mouse" && (hover = true));
-  track.addEventListener("pointerleave", (e) => e.pointerType === "mouse" && (hover = false));
+  track.addEventListener("pointerleave", (e) => {
+    if (e.pointerType !== "mouse") return;
+    hover = false;
+    pointer = null;
+    light();
+  });
+  track.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return;
+    pointer = { x: e.clientX, y: e.clientY };
+    light();
+  });
 
   // Keyboard: bring the focused tile into view and hold still while it has focus.
   track.addEventListener("focusin", (e) => {

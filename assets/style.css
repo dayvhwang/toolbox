@@ -279,9 +279,10 @@ p {
   user-select: none;
   transition: opacity 0.5s var(--ease), filter 0.5s var(--ease);
 }
-/* Hover one tile and the rest fall back: dimmed and out of focus. Not while the
-   row is being dragged or scrolled, when whatever is under the pointer is incidental. */
-.track:not(.moving):hover .item:not(:hover),
+/* Point at one tile and the rest fall back: dimmed and out of focus. The tile under
+   the mouse is marked from the script (.lit), and nothing is marked while the row is
+   being dragged or scrolled, when whatever sits under the pointer is incidental. */
+.track.lit .item:not(.lit),
 .track:not(.moving):focus-within .item:not(:focus-visible) {
   opacity: 0.35;
   filter: blur(6px);
