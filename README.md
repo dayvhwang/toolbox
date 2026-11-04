@@ -13,12 +13,8 @@ Each tool lives in its own repo and its own deployment. This site is the index: 
 | [Type Outline](https://dayvhwang.com/toolbox/tool.html?t=type-outline) | Type, get stacked bubble-letter outlines, export SVG. | `web` | [outlinetypography-tool.vercel.app](https://outlinetypography-tool.vercel.app) | private |
 | [Borders](https://dayvhwang.com/toolbox/tool.html?t=borders) | Add clean borders to images and videos and export them at full size. | `web` | [borders-beta.vercel.app](https://borders-beta.vercel.app) | private |
 | [Backdrop Builder](https://dayvhwang.com/toolbox/tool.html?t=backdrop-builder) | Step-and-repeat backdrop builder: stagger sponsor logos around an event title, export a print-ready vector PDF. | `web` | [backdrop-builder.vercel.app](https://backdrop-builder.vercel.app) | private |
-| [IG Follow Sorter](https://dayvhwang.com/toolbox/tool.html?t=ig-follow-sorter) | Chrome extension: see who doesn't follow you back on Instagram and unfollow in paced batches. | `extension` |  | private |
 | [Neon Clock](https://dayvhwang.com/toolbox/tool.html?t=neon-clock) | A glowing 3D neon clock that runs in the browser. | `web` | [peggygou-at-circoloco.vercel.app](https://peggygou-at-circoloco.vercel.app) | private |
 | [Caravan](https://dayvhwang.com/toolbox/tool.html?t=caravan) | Plan a trip with friends from one link: RSVPs by a date, cost per person that updates with the headcount. | `web` | [caravan-ochre-six.vercel.app](https://caravan-ochre-six.vercel.app) | private |
-| [AI Support Chat](https://dayvhwang.com/toolbox/tool.html?t=ai-support-chat) | A customer-support chatbot focused on UX and guardrails, plus the agent helpdesk it hands off to. | `web` | [ai-support-chat-alpha.vercel.app](https://ai-support-chat-alpha.vercel.app) | [source](https://github.com/dayvhwang/ai-support-chat) |
-| [Maeul Studio](https://dayvhwang.com/toolbox/tool.html?t=maeul) | The Maeul Studio website. | `site` | [maeulstudio.com](https://maeulstudio.com) | private |
-| [Silver Working Sundays](https://dayvhwang.com/toolbox/tool.html?t=silver-working-sundays) | A one-screen invitation to a weekly third space: classical music, a kettle, books and doodling. | `site` | [silverworkingsunday.com](https://silverworkingsunday.com) | private |
 
 <details><summary>Archived</summary>
 

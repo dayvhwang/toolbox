@@ -8,7 +8,11 @@
     "repo": "https://github.com/dayvhwang/crate",
     "repoPublic": false,
     "kind": "cli",
-    "tags": ["music", "audio", "downloads"],
+    "tags": [
+      "music",
+      "audio",
+      "downloads"
+    ],
     "embed": false,
     "status": "active",
     "year": 2026
@@ -22,7 +26,11 @@
     "repo": "https://github.com/dayvhwang/2046",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["photo", "film", "webgl"],
+    "tags": [
+      "photo",
+      "film",
+      "webgl"
+    ],
     "embed": true,
     "status": "active",
     "year": 2026
@@ -36,7 +44,10 @@
     "repo": "https://github.com/dayvhwang/outlinetypography-tool",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["typography", "svg"],
+    "tags": [
+      "typography",
+      "svg"
+    ],
     "embed": true,
     "status": "active",
     "year": 2026
@@ -50,7 +61,10 @@
     "repo": "https://github.com/dayvhwang/borders-tool",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["image", "video"],
+    "tags": [
+      "image",
+      "video"
+    ],
     "embed": true,
     "status": "active",
     "year": 2026
@@ -64,22 +78,12 @@
     "repo": "https://github.com/dayvhwang/backdrop-builder",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["print", "pdf", "events"],
+    "tags": [
+      "print",
+      "pdf",
+      "events"
+    ],
     "embed": true,
-    "status": "active",
-    "year": 2026
-  },
-  {
-    "slug": "ig-follow-sorter",
-    "name": "IG Follow Sorter",
-    "tagline": "Chrome extension: see who doesn't follow you back on Instagram and unfollow in paced batches.",
-    "description": "Shows who you follow that doesn't follow you back (and the reverse), lets you unfollow one by one or in paced batches, and keeps snapshots so you can see who unfollowed you between syncs. Runs entirely in your browser inside your existing instagram.com login. No password, no server.",
-    "url": null,
-    "repo": "https://github.com/dayvhwang/ig-follow-sorter",
-    "repoPublic": false,
-    "kind": "extension",
-    "tags": ["instagram", "chrome"],
-    "embed": false,
     "status": "active",
     "year": 2026
   },
@@ -92,7 +96,10 @@
     "repo": "https://github.com/dayvhwang/peggygou-at-circoloco",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["clock", "3d"],
+    "tags": [
+      "clock",
+      "3d"
+    ],
     "embed": true,
     "status": "active",
     "year": 2026
@@ -106,49 +113,11 @@
     "repo": "https://github.com/dayvhwang/caravan",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["travel", "planning", "rsvp"],
-    "embed": false,
-    "status": "active",
-    "year": 2026
-  },
-  {
-    "slug": "ai-support-chat",
-    "name": "AI Support Chat",
-    "tagline": "A customer-support chatbot focused on UX and guardrails, plus the agent helpdesk it hands off to.",
-    "description": "A storefront chat widget that answers only from hard facts and escalates by judgment, and an agent inbox for the AI handoff. An exercise in when the AI should answer, when it should hand off to a human, and how it guides each customer to the right answer or the right person.",
-    "url": "https://ai-support-chat-alpha.vercel.app",
-    "repo": "https://github.com/dayvhwang/ai-support-chat",
-    "repoPublic": true,
-    "kind": "web",
-    "tags": ["ai", "chat", "support"],
-    "embed": false,
-    "status": "active",
-    "year": 2026
-  },
-  {
-    "slug": "maeul",
-    "name": "Maeul Studio",
-    "tagline": "The Maeul Studio website.",
-    "description": "Next.js site for Maeul Studio.",
-    "url": "https://maeulstudio.com",
-    "repo": "https://github.com/dayvhwang/maeul-studio",
-    "repoPublic": false,
-    "kind": "site",
-    "tags": ["website"],
-    "embed": false,
-    "status": "active",
-    "year": 2026
-  },
-  {
-    "slug": "silver-working-sundays",
-    "name": "Silver Working Sundays",
-    "tagline": "A one-screen invitation to a weekly third space: classical music, a kettle, books and doodling.",
-    "description": "Every Sunday from five to eight. The site is a dark desk with five translucent sheets laid across it. Nothing scrolls; pick a sheet.",
-    "url": "https://silverworkingsunday.com",
-    "repo": "https://github.com/dayvhwang/silver-working-sundays",
-    "repoPublic": false,
-    "kind": "site",
-    "tags": ["website", "events"],
+    "tags": [
+      "travel",
+      "planning",
+      "rsvp"
+    ],
     "embed": false,
     "status": "active",
     "year": 2026
@@ -162,7 +131,10 @@
     "repo": "https://github.com/dayvhwang/groupsync-survey",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["survey", "prototype"],
+    "tags": [
+      "survey",
+      "prototype"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2025
@@ -176,7 +148,10 @@
     "repo": "https://github.com/dayvhwang/Just-In-App",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["prototype", "expo"],
+    "tags": [
+      "prototype",
+      "expo"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2026
@@ -190,7 +165,9 @@
     "repo": "https://github.com/dayvhwang/marathonrace",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["prototype"],
+    "tags": [
+      "prototype"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2025
@@ -204,7 +181,9 @@
     "repo": null,
     "repoPublic": false,
     "kind": "web",
-    "tags": ["prototype"],
+    "tags": [
+      "prototype"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2025
@@ -218,7 +197,10 @@
     "repo": "https://github.com/dayvhwang/followmyball-play",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["3d", "prototype"],
+    "tags": [
+      "3d",
+      "prototype"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2025
@@ -232,7 +214,10 @@
     "repo": "https://github.com/dayvhwang/WindOS",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["portfolio", "prototype"],
+    "tags": [
+      "portfolio",
+      "prototype"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2025
@@ -246,7 +231,9 @@
     "repo": "https://github.com/dayvhwang/HAY",
     "repoPublic": false,
     "kind": "web",
-    "tags": ["prototype"],
+    "tags": [
+      "prototype"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2026
@@ -260,7 +247,10 @@
     "repo": "https://github.com/dayvhwang/dayv",
     "repoPublic": false,
     "kind": "site",
-    "tags": ["website", "portfolio"],
+    "tags": [
+      "website",
+      "portfolio"
+    ],
     "embed": false,
     "status": "archived",
     "year": 2026
