@@ -1,4 +1,4 @@
-import { loadTools, el, initTheme, hostOf } from "/assets/shared.js";
+import { loadTools, el, initTheme, hostOf } from "./shared.js";
 
 initTheme();
 
@@ -11,7 +11,7 @@ function notFound(slug) {
   main.replaceChildren(
     el("div", { class: "notfound" }, [
       el("h1", { text: `No tool called "${slug}".` }),
-      el("p", {}, [el("a", { href: "/", text: "← All tools" })]),
+      el("p", {}, [el("a", { href: "./", text: "← All tools" })]),
     ])
   );
 }
@@ -27,7 +27,7 @@ function render(tools, t) {
   node.querySelector(".tagline").textContent = t.tagline;
   node.querySelector(".description").textContent = t.description || "";
   const tags = node.querySelector(".tags");
-  for (const tag of t.tags || []) tags.append(el("a", { href: `/#f=tag:${encodeURIComponent(tag)}`, text: tag }));
+  for (const tag of t.tags || []) tags.append(el("a", { href: `./#f=tag:${encodeURIComponent(tag)}`, text: tag }));
 
   const actions = node.querySelector(".actions");
   if (t.url) actions.append(el("a", { class: "btn primary", href: t.url, target: "_blank", rel: "noopener", text: "Open ↗" }));
@@ -38,7 +38,7 @@ function render(tools, t) {
   const hero = node.querySelector(".hero");
   if (!t.embed && t.url) {
     const img = hero.querySelector("img");
-    img.src = `/assets/thumbs/${t.slug}.png`;
+    img.src = `./assets/thumbs/${t.slug}.png`;
     img.alt = `${t.name} screenshot`;
     img.addEventListener("load", () => (hero.hidden = false), { once: true });
     hero.href = t.url;
@@ -66,9 +66,9 @@ function render(tools, t) {
   const nx = node.querySelector(".next");
   if (ring.length > 1) {
     pv.textContent = prev.name;
-    pv.href = `/tool.html?t=${encodeURIComponent(prev.slug)}`;
+    pv.href = `./tool.html?t=${encodeURIComponent(prev.slug)}`;
     nx.textContent = next.name;
-    nx.href = `/tool.html?t=${encodeURIComponent(next.slug)}`;
+    nx.href = `./tool.html?t=${encodeURIComponent(next.slug)}`;
   }
 
   main.replaceChildren(node);

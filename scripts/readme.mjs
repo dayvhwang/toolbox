@@ -10,7 +10,7 @@ const readme = await readFile(readmePath, "utf8");
 
 const link = (label, href) => (href ? `[${label}](${href})` : label);
 const row = (t) => {
-  const name = link(t.name, `https://dayvhwang.tools/tool.html?t=${encodeURIComponent(t.slug)}`);
+  const name = link(t.name, `https://dayvhwang.com/toolbox/tool.html?t=${encodeURIComponent(t.slug)}`);
   const live = t.url ? link(new URL(t.url).host, t.url) : "";
   const repo = t.repo && t.repoPublic ? link("source", t.repo) : t.repo ? "private" : "";
   return `| ${name} | ${t.tagline.replace(/\|/g, "\\|")} | \`${t.kind}\` | ${live} | ${repo} |`;

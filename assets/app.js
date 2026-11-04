@@ -1,4 +1,4 @@
-import { KINDS, loadTools, hueFor, el, initTheme } from "/assets/shared.js";
+import { KINDS, loadTools, hueFor, el, initTheme } from "./shared.js";
 
 initTheme();
 
@@ -50,12 +50,12 @@ function card(t) {
   const fallback = thumb.querySelector(".fallback");
   fallback.style.setProperty("--h", hueFor(t.slug));
   fallback.textContent = t.name.slice(0, 2);
-  img.src = `/assets/thumbs/${t.slug}.png`;
+  img.src = `./assets/thumbs/${t.slug}.png`;
   img.addEventListener("error", () => thumb.classList.add("no-image"), { once: true });
 
   const title = node.querySelector(".title");
   title.textContent = t.name;
-  title.href = `/tool.html?t=${encodeURIComponent(t.slug)}`;
+  title.href = `./tool.html?t=${encodeURIComponent(t.slug)}`;
 
   node.querySelector(".tagline").textContent = t.tagline;
   node.querySelector(".kind").textContent = t.kind;

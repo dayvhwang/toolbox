@@ -6,7 +6,7 @@ export const KIND_LABEL = { web: "web", cli: "cli", extension: "extension", site
 let cache;
 export async function loadTools() {
   if (cache) return cache;
-  const res = await fetch("/tools.json", { cache: "no-cache" });
+  const res = await fetch(new URL("../tools.json", import.meta.url), { cache: "no-cache" });
   if (!res.ok) throw new Error(`tools.json: ${res.status}`);
   cache = await res.json();
   return cache;
