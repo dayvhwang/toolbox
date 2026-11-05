@@ -1,6 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#1a1a1c"/>
-  <rect x="7" y="11" width="18" height="13" rx="2.5" fill="none" stroke="#fff" stroke-width="2"/>
-  <path d="M12 11V9a4 4 0 0 1 8 0v2" fill="none" stroke="#fff" stroke-width="2"/>
-  <path d="M7 16.5h18" stroke="#ff4fb3" stroke-width="2"/>
+  <!-- A Toyo steel box, side on: lid, handle, latch. -->
+  <style>
+    svg { color: #1f1f1f; }
+    @media (prefers-color-scheme: dark) { svg { color: #f2f2f2; } }
+  </style>
+  <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="12" width="26" height="15" rx="2.5"/>
+    <path d="M3 18h26"/>
+    <path d="M11.5 12V9a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v3"/>
+  </g>
+  <rect x="14.25" y="16.25" width="3.5" height="3.5" rx="0.6" fill="currentColor"/>
 </svg>
