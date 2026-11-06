@@ -1,11 +1,13 @@
-// Composes a cover for every tool that has a url into assets/thumbs/<slug>.jpg:
-// a 1440x900 screenshot of the tool set as a floating window, centred on a flat #f2f2f2 square.
+// Makes a cover for every tool into assets/thumbs/<slug>.jpg. Tools with a scene in
+// scripts/mocks.mjs get that scene; the rest get a 1440x900 screenshot of the live tool,
+// set as a floating window centred on a flat #f2f2f2 square.
 // Usage: node scripts/thumbs.mjs [slug ...]     (also `npm run thumbs`)
 // Needs: npm i, then `npx playwright install chromium` once.
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { MOCKS, scene } from "./mocks.mjs";
 
 const root = new URL("../", import.meta.url);
 const outDir = new URL("assets/thumbs/", root);
@@ -13,7 +15,7 @@ await mkdir(outDir, { recursive: true });
 
 const only = new Set(process.argv.slice(2));
 const tools = JSON.parse(await readFile(new URL("tools.json", root), "utf8")).filter(
-  (t) => t.url && (only.size === 0 || only.has(t.slug))
+  (t) => (t.url || MOCKS[t.slug]) && (only.size === 0 || only.has(t.slug))
 );
 
 const SIZE = 1024;
@@ -50,12 +52,19 @@ for (const t of tools) {
   const canvas = await studio.newPage();
   const file = fileURLToPath(new URL(`${t.slug}.jpg`, outDir));
   try {
-    await page.goto(t.url, { waitUntil: "networkidle", timeout: 30_000 }).catch(() => page.goto(t.url, { waitUntil: "load", timeout: 30_000 }));
-    await page.waitForTimeout(1500); // let fonts, canvases and intros settle
-    const shot = await page.screenshot({ type: "png" });
-    await canvas.setContent(cover(`data:image/png;base64,${shot.toString("base64")}`), { waitUntil: "load" });
-    await canvas.screenshot({ path: file, type: "jpeg", quality: 88 });
-    console.log(`ok   ${t.slug}  ← ${t.url}`);
+    if (MOCKS[t.slug]) {
+      await canvas.setContent(scene(MOCKS[t.slug]), { waitUntil: "networkidle" });
+      await canvas.evaluate(() => document.fonts.ready);
+      await canvas.screenshot({ path: file, type: "jpeg", quality: 88 });
+      console.log(`ok   ${t.slug}  ← scene`);
+    } else {
+      await page.goto(t.url, { waitUntil: "networkidle", timeout: 30_000 }).catch(() => page.goto(t.url, { waitUntil: "load", timeout: 30_000 }));
+      await page.waitForTimeout(1500); // let fonts, canvases and intros settle
+      const shot = await page.screenshot({ type: "png" });
+      await canvas.setContent(cover(`data:image/png;base64,${shot.toString("base64")}`), { waitUntil: "load" });
+      await canvas.screenshot({ path: file, type: "jpeg", quality: 88 });
+      console.log(`ok   ${t.slug}  ← ${t.url}`);
+    }
   } catch (err) {
     failed++;
     console.error(`FAIL ${t.slug}  ${err.message.split("\n")[0]}`);
