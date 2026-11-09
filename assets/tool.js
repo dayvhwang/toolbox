@@ -6,6 +6,7 @@ const main = document.getElementById("tool");
 const crumb = document.getElementById("crumb");
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
+const links = document.getElementById("links");
 const tpl = document.getElementById("detail");
 
 function notFound(slug) {
@@ -26,11 +27,8 @@ function render(tools, t) {
   document.title = `${t.name} · toolbox`;
   crumb.textContent = t.name;
 
-  node.querySelector(".name").textContent = t.name;
-  node.querySelector(".tagline").textContent = t.tagline;
-  node.querySelector(".description").textContent = t.description || "";
-
-  const links = node.querySelector(".links");
+  // The name sits in the breadcrumb; the links go in the middle of the top bar, so the
+  // tool itself gets the whole viewport.
   const add = (a) => {
     if (links.childElementCount) links.append(el("span", { class: "dot", "aria-hidden": "true", text: "·" }));
     links.append(a);

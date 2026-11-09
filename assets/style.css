@@ -204,6 +204,27 @@ p {
   white-space: nowrap;
 }
 
+.top .links {
+  grid-column: 2;
+  margin: 0;
+  display: flex;
+  gap: 0 8px;
+  white-space: nowrap;
+}
+.top .links:empty {
+  display: none;
+}
+.top .links a {
+  opacity: 0.6;
+}
+.top .links a:hover {
+  opacity: 1;
+}
+.top .links .dot,
+.top .links > span:not(.dot) {
+  opacity: 0.62;
+}
+
 .side {
   grid-column: 3;
   justify-self: end;
@@ -333,14 +354,53 @@ p {
   text-align: center;
 }
 
-/* ---------- tool page ---------- */
+/* ---------- tool page: one screen, nothing to scroll ---------- */
+
+.tool-page {
+  height: 100dvh;
+  overflow: hidden;
+}
+.tool-page .stage {
+  height: 100dvh;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 56px var(--edge) 52px; /* clear of the fixed bars */
+  gap: 0;
+}
+.tool-page .top::before,
+.tool-page .bottom::before {
+  display: none; /* nothing scrolls under the bars here */
+}
+@media (max-width: 639px) {
+  /* No room for three columns: the breadcrumb stays on one line (the tool's name is cut
+     short if it must) and the links drop to a second line beneath it. */
+  .tool-page .top {
+    grid-template-columns: 1fr auto;
+  }
+  .tool-page .crumbs {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  .tool-page .top .links {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .tool-page .side {
+    grid-column: 2;
+  }
+  .tool-page .stage {
+    padding-top: 72px;
+  }
+}
 
 .detail {
-  margin: auto 0; /* vertically centred while it fits, top-aligned once it is tall */
+  flex: 1;
+  min-height: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  justify-content: center;
 }
 
 .head {
@@ -399,7 +459,7 @@ p {
 
 .hero {
   display: block;
-  width: min(100%, 460px);
+  width: min(100%, 460px, 100dvh - 140px); /* a square that always fits between the bars */
   background: var(--tint);
 }
 .hero[hidden] {
@@ -420,7 +480,8 @@ p {
 
 .embed {
   width: 100%;
-  height: min(78dvh, 960px);
+  flex: 1;
+  min-height: 0;
   background: var(--tint);
   box-shadow: 0 0 0 1px var(--line);
 }
