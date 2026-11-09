@@ -122,6 +122,9 @@ function carousel(section, tools, direction = 1) {
   );
 
   // Drag with mouse, pen or finger. A real drag swallows the click that would follow it.
+  // The pointer is captured only once a drag has begun: capturing on pointerdown would make
+  // the browser deliver the click to the track instead of the tile, so a plain click on a
+  // tile would open nothing.
   let startX = 0;
   let startPos = 0;
   let lastX = 0;
@@ -135,13 +138,15 @@ function carousel(section, tools, direction = 1) {
     startPos = x;
     lastT = performance.now();
     v = 0;
-    track.setPointerCapture(e.pointerId);
     track.classList.add("dragging");
   });
   track.addEventListener("pointermove", (e) => {
     if (!dragging) return;
     const dx = e.clientX - startX;
-    if (!moved && Math.abs(dx) > 4) moved = true;
+    if (!moved && Math.abs(dx) > 4) {
+      moved = true;
+      track.setPointerCapture(e.pointerId);
+    }
     if (!moved) return;
     moving(300);
     const now = performance.now();
@@ -161,6 +166,10 @@ function carousel(section, tools, direction = 1) {
   };
   track.addEventListener("pointerup", end);
   track.addEventListener("pointercancel", end);
+  track.addEventListener("lostpointercapture", end);
+  // Pressed on a tile, released outside the row before any drag began: still let go.
+  window.addEventListener("pointerup", end);
+  window.addEventListener("blur", end);
   track.addEventListener("click", (e) => moved && e.preventDefault(), true);
 
   track.addEventListener("pointerenter", (e) => e.pointerType === "mouse" && (hover = true));
@@ -177,10 +186,11 @@ function carousel(section, tools, direction = 1) {
   });
 
   // Keyboard: bring the focused tile into view and hold still while it has focus.
+  // A mouse click also focuses the tile in some browsers; that is not a reason to stop or jump.
   track.addEventListener("focusin", (e) => {
-    focus = true;
     const tile = e.target.closest(".item");
-    if (!tile) return;
+    if (!tile || !tile.matches(":focus-visible")) return;
+    focus = true;
     const left = tile.offsetLeft;
     const right = left + tile.offsetWidth;
     const edge = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
